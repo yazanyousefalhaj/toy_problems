@@ -13,7 +13,40 @@
  */
 
  function isDeepEquals(obj1, obj2) {
-	// TO DO
+	const isListEqual = (l, r) => {
+		if (l.length !== r.length) return false;
+		for (let i = 0; i < l.length; i++) {
+			if (l[i] !== r[i]) {
+				return false;
+			}
+		}
+		return true;
+	};
+
+	if (obj1 === null || obj2 === null || obj1 === undefined || obj2 === undefined) {
+		return false;
+	}
+	if (!isListEqual(Object.keys(obj1), Object.keys(obj2)))
+		return false;
+	
+	for (let key of Object.keys(obj1)) {
+		if (typeof(obj1[key]) !== typeof(obj2[key]))
+			return false;
+		else if (Array.isArray(obj1[key])) {
+			if (!isListEqual(obj1[key], obj2[key])) {
+				return false;
+			}
+		}
+		else if(typeof(obj1[key]) === "object") {
+			if (!isDeepEquals(obj1[key], obj2[key])) {
+				return false;
+			}
+		}
+		else if (obj1[key] !== obj2[key]) {
+			return false;
+		}
+	}
+	return true;
 }
 
 

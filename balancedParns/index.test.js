@@ -24,6 +24,35 @@
  *	"())"
  */
 
- function balancedParens(input) {
-  //  TO DO
+function balancedParens(input) {
+	const open = ['[', '{', '(']
+	const closed = [']', '}', ')']
+	let stack = []
+	for (let ch of input) {
+		if (open.includes(ch)) {
+			stack.push(ch)
+		} else if (closed.includes(ch)) {
+			let lastOpen = stack.pop();
+			if (!lastOpen) return false;
+			const openCh = open[closed.indexOf(ch)]
+			if (openCh != lastOpen) return false;
+		}
+	}
+	return stack.length === 0;
 }
+
+describe("Tests", () => {
+	it("test balancedParens #case1", () => {
+		expect(balancedParens("(")).toEqual(false)
+		expect(balancedParens("()")).toEqual(true)
+		expect(balancedParens(")(")).toEqual(false)
+		expect(balancedParens("(())")).toEqual(true)
+
+		expect(balancedParens("[](){}")).toEqual(true)
+		expect(balancedParens("[({})]")).toEqual(true)
+		expect(balancedParens("[(]{)}")).toEqual(false)
+
+		expect(balancedParens(" var wow  = { yo: thisIsAwesome() }")).toEqual(true)
+		expect(balancedParens(" var hubble = function() { telescopes.awesome();")).toEqual(false)
+	})
+})

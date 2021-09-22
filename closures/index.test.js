@@ -19,3 +19,7 @@ myGame.myLevel(); //should return "You need to improve your game"
 function pingPongTracker () {
 // TO DO
 }
+
+describe('placeholder', () => {
+  it('', () => {})
+})
