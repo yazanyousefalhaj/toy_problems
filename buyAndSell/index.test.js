@@ -26,6 +26,29 @@ function getMinOfArray(numArray) {
   return Math.min.apply(null, numArray);
 }
 
-var maximumProfit  = function(array) {
-	//your code is here
+var maximumProfit = function (array) {
+  const margins = []
+  for (let i = 0; i < array.length - 1; i++) {
+    margins.push(array[i + 1] - array[i])
+  }
+  console.log(margins)
+
+  const maximumSubarray = (arr, begin, end) => {
+    let a1 = 0
+    let a2 = arr[0]
+    arr.forEach((i,a) => {
+      a1 = Math.max(i, a1 + i)
+      a2 = Math.max(a2, a1)
+    })
+    return a2
+  }
+  const res = maximumSubarray(margins, 0, margins.length)
+  return res < 0? 0: res;
 }
+
+describe("Tests", () => {
+  it("test maximumProfit", () => {
+    expect(maximumProfit([100, 80, 120, 130, 70, 60, 100, 125])).toEqual(65)
+    expect(maximumProfit([100, 80, 70, 65, 60, 55, 50])).toEqual(0)
+  });
+});
