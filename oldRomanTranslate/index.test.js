@@ -26,6 +26,40 @@ const DIGIT_VALUES = {
   M: 1000
 };
 
- const translateRomanNumeral = (romanNumeral)=> {
-   // TO DO ...
+const translateRomanNumeral = (romanNumeral) => {
+  let sum = 0;
+  let smallerEncountered = false;
+
+  for (let i = 0; i < romanNumeral.length; i++) {
+    if (!DIGIT_VALUES[romanNumeral[i]]) {
+      return null;
+
+    }
+    if (i < romanNumeral.length - 1) {
+      let digitValue = Object.keys(DIGIT_VALUES).indexOf(romanNumeral[i])
+      let nextDigitValue = Object.keys(DIGIT_VALUES).indexOf(romanNumeral[i + 1])
+      if (digitValue < nextDigitValue) {
+        if (!smallerEncountered) {
+          sum -= DIGIT_VALUES[romanNumeral[i]]
+          smallerEncountered = true
+          continue;
+        } else {
+          return null;
+        }
+      }
+    }
+    sum += DIGIT_VALUES[romanNumeral[i]];
   }
+  return sum;
+}
+
+
+  describe("Tests", () => {
+    it("test toSnakeCase", () => {
+      expect(translateRomanNumeral("XXI")).toEqual(21)
+      expect(translateRomanNumeral("IV")).toEqual(4)
+      expect(translateRomanNumeral("IX")).toEqual(9)
+      expect(translateRomanNumeral("AAAAAAA")).toEqual(null)
+    });
+  });
+
