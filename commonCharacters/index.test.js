@@ -17,5 +17,6 @@ describe('Tests', () => {
   it('test commonCharacters', () => {
     expect(commonCharacters('acexivou', 'aegihobu')).toStrictEqual('aeiou');
     expect(commonCharacters('abcd', 'bdc', 'cd')).toStrictEqual('cd');
+    expect(commonCharacters('abcid', 'ibdci', 'cdddddee')).toStrictEqual('cd');
   });
 });
