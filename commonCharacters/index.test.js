@@ -10,6 +10,21 @@
  * Extra credit: Extend your function to handle more than two input strings.
  */
 
-const commonCharacters = (str1, str2) => {
-  // TODO
+const commonCharacters = (str1, ...strs) => {
+  let res = ""
+  for (let ch of str1) {
+    if (strs.every((value) => value.includes(ch))) {
+      res += ch
+    }
+  }
+
+  return Array.from(new Set(res.split(""))).join("")
 };
+
+
+describe('Tests', () => {
+  it('test commonCharacters', () => {
+    expect(commonCharacters('acexivou', 'aegihobu')).toStrictEqual('aeiou');
+    expect(commonCharacters('abcd', 'bdc', 'cd')).toStrictEqual('cd');
+  });
+});
