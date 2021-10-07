@@ -21,9 +21,6 @@ const flatten = function() {
     return _flatten([...arguments]);
 };
 
-console.log()
-console.log(flatten('a', ['b', 2], 3, null, [[4], ['c']]))
-
 describe('Tests', () => {
   it('test flatten', () => {
     expect(flatten(1, [2, 3], 4, 5, [6, [7]])).toStrictEqual([1, 2, 3, 4, 5, 6, 7]);
