@@ -25,8 +25,8 @@ ticTacToe(solvedBoard);//should return 1
 */
 
 const solvedBoard = (board) => {
-    for (let raw of board) {
-        if (raw.every(v => v === 1) || raw.every(v => v === 2)) {
+    for (let row of board) {
+        if (row.every(v => v === 1) || row.every(v => v === 2)) {
             return 1
         }
     }
