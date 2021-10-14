@@ -11,5 +11,14 @@ secondMax([-1, -5, 2])== -1
 */
 
 const secondMax = function(array) {
-  // TODO
+  array.splice(array.indexOf(Math.max(...array)), 1)
+  return Math.max(...array)
 };
+
+
+describe('Tests', () => {
+  it('test secondMax', () => {
+    expect(secondMax([1,5, 2])).toStrictEqual(2);
+    expect(secondMax([-1, -5, 2])).toStrictEqual(-1);
+  });
+});
