@@ -9,7 +9,11 @@ See example usage to understand what arguments are passed to the callback.
 */
 
 Array.prototype.map = function(callback) {
-
+  let a = []
+  for (let x = 0; x < this.length; x++) {
+    a.push(callback(this[x], x, this))
+  }
+  return a
 };
 
 /*
@@ -31,8 +35,13 @@ with the error message - a simple string that says "Incorrect argument(s)".
 Please see example usage to understand what should be passed to the callback.
 */
 
-const asyncSum = function(a, b, callback) {
-
+const asyncSum = async function(a, b, callback) {
+  if (typeof(a) === 'number' && typeof(b) === 'number') {
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    callback(undefined, a + b)
+  } else {
+    callback("Incorrect argument(s)")
+  }
 };
 
 /*
@@ -57,5 +66,5 @@ asyncSum(10,"B",logNumber);
 /*
 Problem 3 (ADVANCED):
 What kind of candy do you like?
-Your answer:
+Your answer: <3
 */
